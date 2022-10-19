@@ -1,4 +1,10 @@
 import axios from "axios";
+
+/**
+ * 
+ * @param {*} token Token de acceso para obtener a los clientes
+ * @returns {Array} retorna un array con los clientes en la base de datos
+ */
 const getClientes = async (token) => {
   let headersList = {
     "Content-Type": "application/json",

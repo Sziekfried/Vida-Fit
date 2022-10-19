@@ -3,6 +3,8 @@ import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import GerentReducer from "../../context/Gerente/GerentReducer";
 
+
+//Esta pagina es para salir del modo Administrador 
 function LogoutPage() {
   let [salio, setSalio] = useState(false);
   if (salio) {

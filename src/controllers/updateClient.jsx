@@ -2,6 +2,13 @@ import axios from "axios";
 import swal from "sweetalert";
 
 
+/**
+ * 
+ * @param {{JSON}} body json con los datos actualizados del cliente
+ * @param {[TOKEN]} token token del administrador 
+ * @param {String} id ID del cliente a modificar
+ * @returns 
+ */
 export const updateClient = async(body, token, id)=> {
 const urlEdit = `http://localhost:3000/api/clientes/${id}`
 

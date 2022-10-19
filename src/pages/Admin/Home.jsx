@@ -1,7 +1,7 @@
 import { Container, Row, Col, Card, CardGroup, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom'
 function Home() {
-
+//Pagina inicial del Adminitrador para hacer cambios en la pagina del publico asi como agregar a clientes y registrar sus visitas
 
   return (
     <Container className="text-center">

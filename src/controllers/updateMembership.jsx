@@ -8,8 +8,8 @@ import swal from "sweetalert";
  * @param {TOKEN} token token del administrador 
  * @returns {response} retorna la respuesta del servidor
  */
-export const updateEvent = async(body, id, token)=>{
-let urlID = `http://localhost:3000/api/eventos/${id}`
+export const updateMembership = async(body, id, token)=>{
+let urlID = `http://localhost:3000/api/membresias/${id}`
     let headersList = {
         "Accept": "*/*",
         "x-access-token": JSON.parse(token),

@@ -2,6 +2,7 @@ import * as Home from './Home'
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
+//Esta es la pagina que el publico tiene acceso
 function HomePage() {
   return (
     <>

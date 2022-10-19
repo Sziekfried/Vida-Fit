@@ -6,7 +6,7 @@ import swal from "sweetalert";
  * 
  * @param {string} body RFC del cliente a buscar
  * @param {string} token token del administrador esta almacenado en el local storage 
- * @returns 
+ * @returns {object} retorna un registro encontrado
  */
 const getClientByRfc = async(body, token) => {
 let headersList = {

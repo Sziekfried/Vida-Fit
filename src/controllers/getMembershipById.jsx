@@ -7,8 +7,8 @@ import swal from "sweetalert";
  * @param {string} id id del evento para retornar todo el registro del objeto 
  * @returns {evento} retorna un evento
  */
-const getEventtById = async (id) => {
-   let urlId=`http://localhost:3000/api/eventos/${id}`
+const getMembershipById = async (id) => {
+   let urlId=`http://localhost:3000/api/membresias/${id}`
   let headersList = {
     Accept: "*/*",
     "Content-Type": "application/json",
@@ -29,4 +29,4 @@ const getEventtById = async (id) => {
   
 };
 
-export default getEventtById;
+export default getMembershipById;

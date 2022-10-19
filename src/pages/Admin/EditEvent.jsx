@@ -3,6 +3,11 @@ import {Container, Row, Col, CardGroup, Button, Card} from 'react-bootstrap'
 import { getEventos } from "../../controllers/getEventos";
 import {Link} from 'react-router-dom'
 
+
+/**
+ * 
+ * @returns componente de Ventana de edicion de Eventos
+ *  */
 function EditEvent() {
 const token = window.localStorage.getItem("token")
 let [eventos, setEventos] = useState(null)
@@ -13,6 +18,10 @@ useEffect(() => {
   })
 },[])
 
+/**
+ * 
+ * @returns Retorna en componente tipo Card Group con todos los eventos disponibles
+ */
 const TarjEvents = () => {
   if (eventos) {
     return (

@@ -1,4 +1,4 @@
-
+//Este archivo solo tiene el uso para centralizar todos los Exports
 import Home from './Home'
 import LoginPage from './LoginPage'
 import MembershipPage from './MembershipPage'
@@ -9,7 +9,7 @@ import EditEvent from './EditEvent'
 import LogoutPage from './LogoutPage'
 import EditClient from './EditClient'
 import FormEditEvent from './FormEditEvent'
-
+import FormEditMembership from './FormEditMembership'
 export {
     Home,
     LoginPage,
@@ -20,5 +20,6 @@ export {
     EditEvent,
     LogoutPage,
     EditClient,
-    FormEditEvent
+    FormEditEvent,
+    FormEditMembership
 }

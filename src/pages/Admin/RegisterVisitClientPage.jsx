@@ -2,13 +2,31 @@ import {Container, Row, Col, Button, Form, Card} from "react-bootstrap";
 import { Formik, Field, Form as FormFormik} from 'formik'
 import {useState} from 'react'
 import getClientByRfc from "../../controllers/getClientByRfc";
+import {Navigate} from "react-router-dom";
+import swal from "sweetalert";
 
+//Pagina para registrar las visitas de los miembros del club partiendo de su rfc
 function RegisterVisitClientPage() {
   const token = window.localStorage.getItem("token")
   let [miembro, setMiembro] = useState(null);
-
+  let [pasa, setPasa] = useState(false)
+  const verificarFechas = (fechaFin)=> {
+    let fechaHoy = +new Date()
+    let fechaFinSub = +new Date(fechaFin)
+    
+    if (fechaFinSub > fechaHoy){
+      swal('Bienvenido','El cliente tiene una membresia vigente','info')
+      setInterval(()=>{
+        setPasa(true)
+      },1000)
+    }else{
+      swal('Expiro', 'La membresia del cliente ha expirado', 'error')
+    }
+   }
   const TarjetaMiembro = () => {
+    
     if(miembro){
+      
       return (
         <Card className="text-center" style={{ maxHeight: '80vh' }}>
           <Card.Img className="mx-auto" style={{ width: 200, }}
@@ -29,13 +47,13 @@ function RegisterVisitClientPage() {
             </Card.Text>
             <Card.Text>
               <h6>Inicio de Suscripcion:</h6>
-              {new Date(miembro.dateOfSubscription).toLocaleString()}
+              {new Date(miembro.dateOfSubscription).toLocaleString().split(',')[0]}
             </Card.Text>
             <Card.Text>
               <h6>Fin de la Susripcion</h6>
-              {new Date(miembro.endOfSubscription).toLocaleString()}
+              {new Date(miembro.endOfSubscription).toLocaleString().split(',')[0]}
             </Card.Text>
-            <Button variant="primary">Registrar Visita</Button>
+            <Button onClick={(ev)=>verificarFechas(miembro.endOfSubscription)} variant="primary">Registrar Visita</Button>
           </Card.Body>
         </Card>
       );
@@ -46,6 +64,7 @@ function RegisterVisitClientPage() {
     }
   } 
 
+  if (pasa) return <Navigate to="/home-admi" />
   return (
     <Container>
       <Row>
@@ -70,8 +89,8 @@ function RegisterVisitClientPage() {
             </Form>
           </Formik>
         </Col>
-        <Col className="text-center mt-5" sm={7}>
-          <h3>{new Date().toLocaleString()}</h3>
+        <Col className="text-center mt-2" sm={7}>
+          <h3>{new Date().toLocaleString().split(',')[0]}</h3>
           <TarjetaMiembro />
         </Col>
       </Row>

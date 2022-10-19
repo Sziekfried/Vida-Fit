@@ -3,9 +3,14 @@ import {Container, Row, Col, Table, Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import deleteClient from '../../controllers/deleteClient'
 import { getClientes } from '../../controllers/getClientes'
+
+
+/**
+ * 
+ * @returns Retorna un componente Con todos los clientes
+ */
 function Clients() {
   const [clientes, setClientes] = useState(null)
-
   useEffect(()=>{
     const token = window.localStorage.getItem("token")
     getClientes(token).then(data=>{
@@ -13,6 +18,10 @@ function Clients() {
     })
   },[])
 
+  /**
+   * @void funcion que elimina al cliente
+   * @param {String} id id del cliente a eliminar
+   */
   const deleteButton = async(id)=>{
     const token = window.localStorage.getItem("token")
     let respuesta = await swal({

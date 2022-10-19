@@ -8,7 +8,11 @@ import { useState, useEffect } from "react";
 import { updateClient } from "../controllers/updateClient";
 
 
-
+/**
+ * 
+ * @param {Object} param0 Requiere que se le herede todo el registro que se va a editar para mostrarse en el formulario inicial
+ * @returns Componente de formulario para haer las ediciones en el registro 
+ */
 function UpdateClientForm({ miembro }) {
 let token = window.localStorage.getItem("token")
 let [membresias, setMembresias] = useState(null);
@@ -34,7 +38,11 @@ useEffect(() => {
       );
     }
   }
-
+/**
+ * 
+ * @param {String} memb Membresia elegida
+ * @returns {Number} retorna un Numero correspondiente a los dias de la membresia
+ */
   function obtenerDias(memb){
     let dias = 0;
     membresias.forEach(item=>{
@@ -49,7 +57,9 @@ useEffect(() => {
 
 
 
-
+/**
+ * Se hace uso de la libreria Yup en conjunto con Formik para hacer las validaciones en el formulario
+ */
   const validacionYup = Yup.object({
     name: Yup.string("Ingresa El Nombre")
       .max(15, "Maximo 15 caracteres")

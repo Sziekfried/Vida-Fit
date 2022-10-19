@@ -1,5 +1,10 @@
 import axios from "axios";
 
+
+/**
+ * 
+ * @returns retorna un array con todos los eventos disponibles
+ */
 const getEventos = async () => {
   let headersList = {
     "Content-Type": "application/json",

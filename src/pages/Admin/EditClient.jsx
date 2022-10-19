@@ -5,7 +5,10 @@ import { updateClient } from "../../controllers/updateClient";
 import UpdateClientForm from "../../components/UpdateClientForm";
 
 
-
+/**
+ * 
+ * @returns Componente que es la ventana de edicion del cliente
+ */
 function EditClient() {
   let token = window.localStorage.getItem("token");
   let rfc = window.location.pathname.split("/")[2];

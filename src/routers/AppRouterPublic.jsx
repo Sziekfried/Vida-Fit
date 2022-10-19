@@ -2,6 +2,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { LoginPage } from '../pages/Admin'
 
+//Rutas publicas
 import * as Pages from '../pages'
 function AppRouterPublic() {
   return (

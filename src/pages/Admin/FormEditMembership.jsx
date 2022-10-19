@@ -1,61 +1,65 @@
 import { useEffect, useState } from "react";
-import { Navigate } from 'react-router-dom'
-import { Container, Row, Col, Button } from "react-bootstrap";
-import getEventtById from "../../controllers/getEventById";
+import { Navigate } from "react-router-dom";
+import { Container, Row, Col, Button, Form, InputGroup } from "react-bootstrap";
 import { useFormik } from "formik";
-import { Form } from "react-bootstrap";
 import * as Yup from "yup";
-import { convertirFecha } from "../../functions/convertirFecha";
-import { updateEvent } from '../../controllers/updateEvent'
+import getMembershipById from "../../controllers/getMembershipById";
+import { updateMembership } from "../../controllers/updateMembership";
 
-function FormEditEvent() {
-
+function FormEditMembership() {
   // Configuraciones Iniciales
   const token = window.localStorage.getItem("token");
   let idEvent = window.location.pathname.split("/")[2];
-  let [evento, setEvento] = useState(null);
+  let [membresia, setMembresia] = useState(null);
   let [enviado, setEnviado] = useState(false);
-  let [salir, setSalir] = useState()
+  let [salir, setSalir] = useState();
   useEffect(() => {
-    getEventtById(idEvent).then((data) => {
-      setEvento(data);
+    getMembershipById(idEvent).then((data) => {
+      setMembresia(data);
     });
   }, []);
 
   //Componente Formulario
-  const FormEdit = ({ evento }) => {
+  const FormEdit = ({ membresia }) => {
     //Configuracion de la Validacion
     const validacionYup = Yup.object({
-      title: Yup.string("Ingresa El Nombre")
+      title: Yup.string("Ingresa El Titulo para la Membresia")
         .max(40, "Maximo 40 caracteres")
         .required("Este campo es necesario"),
-      date: Yup.date("Ingresa la fecha").required("Este campo es necesario"),
+      level: Yup.string("Ingresa El nivel").required("Este campo es necesario"),
       description: Yup.string("Ingresa El numero de telefono")
-        .min(90, "Minimo 90 caracteres")
+        .min(40, "Minimo 40 caracteres")
         .required("Este campo es necesario"),
+      duration: Yup.number("Ingresa la duracion en Dias").required(
+        "Este campo es necesario"
+      ),
+      price: Yup.number(
+        "Ingresa El precio en Dolares de la Membresia"
+      ).required("Este campo es necesario"),
       image: Yup.string("Ingresa El La url De La imagen"),
     });
-    //Configuracion de Formik 
+    //Configuracion de Formik
     const formik = useFormik({
       initialValues: {
-        title: evento.title,
-        date: convertirFecha(evento.date),
-        description: evento.description,
-        image: evento.image,
+        title: membresia.title,
+        description: membresia.description,
+        level: membresia.level,
+        duration: membresia.duration,
+        price: membresia.price,
+        image: membresia.image,
       },
       validationSchema: validacionYup,
       onSubmit: async (values) => {
         setEnviado(true);
-        let seGuardo = await updateEvent(
-          JSON.stringify(values, null, 2),
-          evento._id,
-          token
-        );
+        let seGuardo = await updateMembership(JSON.stringify(values, null, 2),
+        membresia._id,
+        token);
         seGuardo ? setSalir(true) : setSalir(false);
       },
     });
 
-    return ( //Retornamos el formulario COn las configuraciones establecidas
+    return (
+      //Retornamos el formulario COn las configuraciones establecidas
       <Form onSubmit={formik.handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Titulo</Form.Label>
@@ -72,7 +76,7 @@ function FormEditEvent() {
           ) : null}
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Descripcion del evento</Form.Label>
+          <Form.Label>Descripcion del membresia</Form.Label>
           <Form.Control
             id="description"
             name="description"
@@ -87,18 +91,43 @@ function FormEditEvent() {
           ) : null}
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Fecha del Evento</Form.Label>
+          <Form.Label>Nivel</Form.Label>
           <Form.Control
-            id="date"
-            name="date"
+            id="level"
+            name="level"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.date}
-            type="date"
+            value={formik.values.level.toUpperCase()}
+            type="text"
           />
-          {formik.touched.date && formik.errors.date ? (
-            <div>{formik.errors.date}</div>
+          {formik.touched.level && formik.errors.level ? (
+            <div>{formik.errors.level}</div>
           ) : null}
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Duracion y Precio</InputGroup.Text>
+            <Form.Control aria-label="Duracion" 
+            id="duration"
+            name="duration"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.duration}
+            type="text" />
+            {formik.touched.duration && formik.errors.duration ? (
+            <div>{formik.errors.duration}</div>
+          ) : null}
+            <Form.Control aria-label="Precio" 
+            id="price"
+            name="price"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.price}
+            type="text"/>
+            {formik.touched.price && formik.errors.price ? (
+            <div>{formik.errors.price}</div>
+          ) : null}
+          </InputGroup>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>url de la imagen</Form.Label>
@@ -121,12 +150,12 @@ function FormEditEvent() {
     );
   };
 
-  if(salir) return <Navigate to="/edit-events" />
+  if (salir) return <Navigate to="/edit-membresias" />;
   return (
     <Container>
       <Row>
         <Col sm={4}>
-        {evento ? <FormEdit evento={evento} /> : <h2>cargando</h2>}
+          {membresia ? <FormEdit membresia={membresia} /> : <h2>cargando</h2>}
         </Col>
         <Col></Col>
       </Row>
@@ -134,4 +163,4 @@ function FormEditEvent() {
   );
 }
 
-export default FormEditEvent;
+export default FormEditMembership;
