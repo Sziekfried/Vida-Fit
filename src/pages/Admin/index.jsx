@@ -7,7 +7,8 @@ import SubscribeClientPage from './SubscribeClientPage'
 import Clients from './Clients'
 import EditEvent from './EditEvent'
 import LogoutPage from './LogoutPage'
-
+import EditClient from './EditClient'
+import FormEditEvent from './FormEditEvent'
 
 export {
     Home,
@@ -17,5 +18,7 @@ export {
     SubscribeClientPage,
     Clients,
     EditEvent,
-    LogoutPage
+    LogoutPage,
+    EditClient,
+    FormEditEvent
 }

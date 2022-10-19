@@ -14,8 +14,10 @@ function AppRouterAdmi() {
         element={<Admin.RegisterVisitClientPage />}
       />
       <Route exact path="/new-client" element={<Admin.SubscribeClientPage />} />
+      <Route exact path="/edit-client/:id" element={<Admin.EditClient />} />
       <Route path="/edit-membresias" element={<Admin.MembershipPage />} />
       <Route path="/edit-events" element={<Admin.EditEvent/>} />
+      <Route path="/edit-events/:id" element={<Admin.FormEditEvent/>} />
       <Route path="/login" element={<Admin.LoginPage />}></Route>
       <Route path="/logout" element={<Admin.LogoutPage />}></Route>
       <Route path="*" element={<Pages.NotFoundPage />}></Route>

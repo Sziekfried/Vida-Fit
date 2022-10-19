@@ -4,6 +4,8 @@ import {Container, Col, Row, Button, Form, Card } from "react-bootstrap";
 import * as Yup from "yup";
 import { agregarCliente } from '../../controllers/addClient';
 import { getMembresias } from '../../controllers/getMembresias';
+import swal from 'sweetalert';
+import { Navigate } from 'react-router-dom';
 
 function SubscribeClientPage() {
   //calculos con las fechas
@@ -17,6 +19,8 @@ function SubscribeClientPage() {
       setFecha(stringFecha)
   }
   let [dias, setDias] = useState(0);
+
+  let [enviado, setEnviado] = useState(false)
 
 //obtener todas las membresias
 let [membresias, setMembresias] =useState(null);
@@ -56,7 +60,14 @@ const formik = useFormik({
       const valuesForm = values;
       const endSub = {endOfSubscription:fecha}
       const bodyClient = JSON.stringify(Object.assign(valuesForm,endSub))
-      agregarCliente(bodyClient);
+      agregarCliente(bodyClient).then(res=>{
+        if (!(res.response)){
+          setEnviado(true)
+          console.log(res.response);
+        }else{
+          console.log(res.response);
+        }
+      });
     },
   });
 
@@ -100,7 +111,7 @@ const formik = useFormik({
           {membresias.map((item, idx) => (
             <Col key={idx}>
               <Card className='p-2 h-100'>
-                <Card.Img variant="top" src={item.image} />
+                <Card.Img style={{margin:"auto",width:100}} variant="top" src={item.image} />
                 <Card.Body>
                   <Card.Title>{item.title}</Card.Title>
                   <Card.Text>Nivel de Membresia: {item.level.toUpperCase()}</Card.Text>
@@ -127,8 +138,11 @@ const formik = useFormik({
       );
     }
   };
-
-  return (
+  if(enviado){
+    return(
+      <Navigate to="/clientes" />
+    )
+  }else return (
     <Container>
       <Row className="mx-auto mt-3">
         <Col sm={7}>
@@ -171,7 +185,7 @@ const formik = useFormik({
                 id="rfc"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.rfc}
+                value={formik.values.rfc.toUpperCase()}
                 placeholder="RFC del cliente"
               />
               {formik.touched.rfc && formik.errors.rfc ? (
