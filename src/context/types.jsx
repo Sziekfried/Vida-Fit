@@ -1,0 +1,2 @@
+export const ID_GERENTE = 'ID_GERENTE'
+export const TOKEN_GERENTE = 'TOKEN_GERENTE'

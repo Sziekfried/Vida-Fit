@@ -15,5 +15,7 @@ Un club con diversos servicios adaptados a varias membresias,
 ### Tecnologias Usadas:
 
 * React
-* MongoDB
 * MaterializeCSS
+
+## Este proyecto solo es la parte Front End
+Para visitar el repositorio donde se encuentra el backend de la aplicacion seguir el siguiente vinculo: 
