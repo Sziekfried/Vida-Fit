@@ -1,4 +1,4 @@
-
+import { urlAPI } from './config';
 import {GerentContext} from '../context/Gerente/GerentContext';
 import {useContext} from 'react'
 import axios from "axios";

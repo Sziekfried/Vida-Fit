@@ -26,7 +26,6 @@ function RegisterVisitClientPage() {
   const TarjetaMiembro = () => {
     
     if(miembro){
-      
       return (
         <Card className="text-center" style={{ maxHeight: '80vh' }}>
           <Card.Img className="mx-auto" style={{ width: 200, }}

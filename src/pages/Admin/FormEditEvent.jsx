@@ -86,6 +86,7 @@ function FormEditEvent() {
             <div>{formik.errors.description}</div>
           ) : null}
         </Form.Group>
+        
         <Form.Group className="mb-3">
           <Form.Label>Fecha del Evento</Form.Label>
           <Form.Control
@@ -114,7 +115,7 @@ function FormEditEvent() {
             <div>{formik.errors.image}</div>
           ) : null}
         </Form.Group>
-        <Button disabled={enviado} variant="info" type="submit">
+        <Button disabled={false} variant="info" type="submit">
           Actualizar
         </Button>
       </Form>

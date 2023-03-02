@@ -10,12 +10,16 @@ Un club con diversos servicios adaptados a varias membresias,
 4. Ejecutar el siguiente comando:
     `$ npm install`
 5. Posteriormente Ejecutar:
-    `$ npm run dev`
+    `$ npm run build`
+    `$ npm run preview`
 
 ### Tecnologias Usadas:
 
 * React
-* MaterializeCSS
+* React-Bootstrap
+* Formik
+* Yup
 
 ## Este proyecto solo es la parte Front End
-Para visitar el repositorio donde se encuentra el backend de la aplicacion seguir el siguiente vinculo: 
+Este proyecto se basa en React, los estilos se asignaron con bootstrap, para la creacion de formularios se ocupo el framework formik y para la validacion de los mismos se ocupo Yup.
+Para el enrutamiento se hizo uso de react-router-dom
